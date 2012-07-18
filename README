@@ -1,9 +1,7 @@
 Python interface to utilize CSV data and gnuplot to plot data
 
-Usage: python acc-plotter.py [data.csv] [num-channels] [graph-freq]
+Run the command for usage information.  
 
-1. [data.csv] is the data CSV file which should be plotted.
+Example: python accplotter.py LOG_17Jul2012_08h00m13s.csv '1,2,3' 512 "Line 19 Accelerometer Data" 0 8:24
 
-2. [num-channels] is the number of data channels which should be plotted.  The data channels will be plotted in the consecutive order found in the file starting with the second column, where the first column is the x axis.
-
-3. [graph-freq] is the sample frequency in Hz of the plotted data. A value of 0 will use the full frequency of the given file. Any non-zero value must be lower than the frequency of data in the given file.
+This will plot all 3 channels of the file LOG_17Jul2012_08h00m13s.csv from the start of the data until 8:24.
