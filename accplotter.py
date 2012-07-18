@@ -30,6 +30,8 @@ if (len(sys.argv) != 7):
     sys.exit()
 
 # TODO: Include the option to manually set the yrange
+# TODO: Include the option to manually set the output resolution
+# TODO: Put graph sample rate in graph title and maybe filename?
 
 fname_arg = sys.argv[1]
 chann_arg = sys.argv[2]
@@ -50,18 +52,24 @@ chan_low = int(head[1].lstrip("Low Channel,"))
 chan_high = int(head[2].lstrip("High Channel,"))
 numchan_file = chan_high - chan_low + 1
 
-# Calculate the number of points to skip from the data file
-#    frequency and the desired graph sampling rate
-every = freq_file/freq_arg
-
-# TODO: Check that given parameter is within bounds
-# if ([data-freq] > ) return 0;
+# Check that given frequency is within bounds
+if freq_file < freq_arg:
+    print "Your requested frequency is higher than the file's data sample rate"
+    sys.exit()
 # Calculate how often to skip a data point to meet [data-freq]
 # else {
 #     every = data_frequency/[data-freq];
 # }
 # Calculate the number of points to skip to achieve the desired
 #    graph sample rate
+
+# Calculate the number of points to skip from the data file
+#    frequency and the desired graph sampling rate
+if freq_arg == 0:
+    # Plot all data points
+    every = 1
+else:
+    every = freq_file/freq_arg
 
 # Get absolute start_time of file
 starttime = time.strptime(fname_arg, "LOG_%d%b%Y_%Hh%Mm%Ss.csv")
@@ -101,10 +109,6 @@ end_stct = time.gmtime(plot_end - 5*3600)
 
 print "Plotting data starting at " + str(plot_start)
 print "Graph will end at " + str(plot_end)
-
-# TODO: Check if given parameters are within bounds
-# if ([start-time] < start_time) return 0;
-# if ([end-time] > end_time) return 0;
 
 # Send gnuplot commands
 # Open the subprocess
@@ -150,8 +154,9 @@ else:
 
 chan_dict_l = list(chan_dict)
 # Remove first and last elements to this list
-del chan_dict_l[-1]
-del chan_dict_l[0]
+if numchan > 2:
+    del chan_dict_l[-1]
+    del chan_dict_l[0]
 
 # Check that the given parameter is within bounds
 if len(chan_dict) > numchan_file:
