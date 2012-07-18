@@ -71,7 +71,7 @@ epoch_start = time.mktime(starttime)
 # Convert start time to string
 ststr = strftime("%d%b%Y_%Hh%Mm%Ss", starttime)
 # Calculate end time of file
-epoch_end = epoch_start + ((1/float(freq_file))*(float(rows_file)-1))/3
+epoch_end = epoch_start + ((1/float(freq_file))*(float(rows_file)-1))/numchan_file
 # Convert to time structure
 endtime = time.gmtime(epoch_end)
 
