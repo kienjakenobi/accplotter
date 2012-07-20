@@ -221,6 +221,7 @@ def iterate_columns(fname, colargs):
                             chan_names[chan_dict[0]-2]))
         # Loop through the middle portion of the requested channels
         for i in chan_dict_l:
+            print chan_dict_l
             plot.stdin.write("'%s' every %d::%d using \
                             ($1+%d-(5*3600)):((($%d-32768)/32768)*10) with \
                             linespoints title '%s'," 
