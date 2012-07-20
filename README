@@ -1,4 +1,4 @@
-Python interface to utilize CSV data and gnuplot to plot data.
+Python interface to utilize CSV data and gnuplot to plot data
 
 Usage: python acc-plotter.py [data.csv] [channels] [graph-freq] [title] [start] [end]
 
