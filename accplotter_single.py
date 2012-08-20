@@ -23,8 +23,8 @@ def main():
         print "A value of 0 will use the full frequency of the given file."
         print "Any non-zero value must be lower than the frequency of data in" + \
         "the given file.\n"
-        print "[title] is an alternative title for the plot which will be" + \
-        "printed as '[title] Starting at DATE'.  A value of zero will use the" + \
+        print "[title] is an alternative title for the plot which will be " + \
+        "printed as '[title] Starting at DATE'.  A value of zero will use the " + \
         "default plot title, 'Vibration Data Starting at DATE'\n"
         print "[start] is the start time in HH:MM.  If '0', then starts of file's start.\n"
         print "[end] is the graph end time in HH:MM.  If '0', then ends at file's end."
@@ -42,8 +42,8 @@ def main():
     title_arg = sys.argv[4]
     start_arg = sys.argv[5]
     end_arg = sys.argv[6]
-    min_arg = int(sys.argv[7])
-    max_arg = int(sys.argv[8])
+    min_arg = float(sys.argv[7])
+    max_arg = float(sys.argv[8])
     
     # Get metadata from the file
     with open(fname_arg) as f:
