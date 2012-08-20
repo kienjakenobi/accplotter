@@ -23,9 +23,8 @@ def main():
         print "A value of 0 will use the full frequency of the given file."
         print "Any non-zero value must be lower than the frequency of data in" + \
         "the given file.\n"
-        print "[title] is an alternative title for the plot which will be " + \
-        "printed as '[title] Starting at DATE'.  A value of zero will use the " + \
-        "default plot title, 'Vibration Data Starting at DATE'\n"
+        print "[title] is a title for the plot which will be " + \
+        "printed as '[title] Starting at DATE'.\n"
         print "[start] is the start time in HH:MM.  If '0', then starts of file's start.\n"
         print "[end] is the graph end time in HH:MM.  If '0', then ends at file's end."
         print "[y-min] is the minimum range for the y-axis. " + \
@@ -56,6 +55,9 @@ def main():
     chan_low = int(head[1].lstrip("Low Channel,"))
     chan_high = int(head[2].lstrip("High Channel,"))
     numchan_file = chan_high - chan_low + 1
+    
+    if freq_arg == 0:
+        freq_arg = freq_file
     
     # Configure y-range variables
     if min_arg == 0:
@@ -123,7 +125,7 @@ def main():
     else:
         # Default graph title
         plot.stdin.write("set title \"Accelerometer Data Starting at %s, %dHz\"\n" % 
-                         strftime("%d %b %Y at %H:%M:%S", start_stct), freq_arg)
+                         (strftime("%d %b %Y at %H:%M:%S", start_stct), freq_arg))
     
     plot.stdin.write("set datafile separator \",\"\n")
     # Is this necessary?
